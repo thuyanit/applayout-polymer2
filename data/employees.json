@@ -1,0 +1,16 @@
+{
+  "employees": [
+    {"name": "Nguyen Van A", "status": "Fulltime", "date_contract": "2017/02/07"},
+    {"name": "Nguyen Van B", "status": "Probation", "date_contract": "2017/02/07"},
+    {"name": "Nguyen Van C", "status": "Fulltime", "date_contract": "2017/02/07"},
+    {"name": "Nguyen Van D", "status": "Fulltime", "date_contract": "2018/02/07"},
+    {"name": "Nguyen Van E", "status": "Fulltime", "date_contract": "2017/02/07"},
+    {"name": "Nguyen Van F", "status": "Fulltime", "date_contract": "2017/10/07"},
+    {"name": "Nguyen Van G", "status": "Probation", "date_contract": "2017/02/07"},
+    {"name": "Nguyen Van H", "status": "Fulltime", "date_contract": "2016/02/07"},
+    {"name": "Nguyen Van Y", "status": "Fulltime", "date_contract": "2017/02/07"},
+    {"name": "Nguyen Van K", "status": "Fulltime", "date_contract": "2017/02/07"},
+    {"name": "Nguyen Van L", "status": "Fulltime", "date_contract": "2017/09/07"},
+    {"name": "Nguyen Van M", "status": "Fulltime", "date_contract": "2017/12/07"}
+  ]
+}
