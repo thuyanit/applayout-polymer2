@@ -1,0 +1,224 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-drawer/app-drawer.html">
+
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="applayout-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+      }
+      *{
+        margin: 0; padding: 0;
+      }
+
+      app-drawer {
+        --app-drawer-scrim-background: rgba(0, 0, 0, 0.5); /* Overlay */
+
+        --app-drawer-content-container: {
+          background-color: #0b253d;
+          box-shadow: 0 0 7px #000;
+        }
+      }
+      
+      app-drawer-layout:not([narrow]) [drawer-toggle] {
+        display: none;
+      }
+
+      .drawer ul{
+        margin: 20px 0 0;
+      }
+      .drawer li{
+        list-style: none;
+        
+      }
+  
+      .drawer a{
+        display: flex;
+        align-items: center;
+        padding: 15px 10px;
+        text-decoration: none;
+        color: #ccc;
+        transition: all .3s;
+        border-bottom: 1px solid #0b253d;
+      }
+      .drawer a:hover{
+        background-color: rgba(0, 0, 0, 0.5);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .drawer__head{
+        text-align: center;
+      }
+      .avatar{
+        border-radius: 50%;
+      }
+
+      app-toolbar{
+        background-color: #19334d;
+      }
+
+      .toolbar{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        color: #ccc;
+        padding: 0 20px;
+      }
+      .toolbar h1{
+        font-size: 18px;
+      }
+      paper-button{
+        font-size: 13px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0);
+        transition: all .3s;
+      }
+      paper-button:hover{
+        background-color: #001a33;
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+
+      #primary{
+        margin: 0 10px;
+      }
+      table{
+        width: 100%;
+        margin: 50px 0 0;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+        border-collapse: collapse;
+      }
+      th, td{
+        border-top: 1px solid #ccc;
+        padding: 10px 5px;
+        text-align: left;
+      }
+      th:first-child, td:first-child{
+        width: 50px;
+        text-align: center;
+      }
+      th:last-child, td:last-child {
+        width: 150px;
+        text-align: center;
+      }
+      th{
+        border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+      }
+      iron-icon{
+        margin-right: 10px;
+      }
+    </style>
+    
+    <app-drawer-layout fullbleed="">
+      <!-- Sidebar -->
+      <app-drawer slot="drawer" class="drawer">
+          <div class="drawer__head">
+            <img src="../../images/avatar.png" alt="" width="180" class="avatar">
+          </div>
+          <ul>
+            <li><a href=""><iron-icon icon="list"></iron-icon>Employees List</a></li>
+            <li><a href=""><iron-icon icon="group-work"></iron-icon>Department List</a></li>
+            <li><a href=""><iron-icon icon="assignment"></iron-icon>Recruitment</a></li>
+            <li><a href=""><iron-icon icon="settings"></iron-icon>Setting</a></li>
+            <li><a href=""><iron-icon icon="account-circle"></iron-icon>Profiles</a></li>
+            <li><a href=""><iron-icon icon="power-settings-new"></iron-icon>Logout</a></li>
+          </ul>
+      </app-drawer>
+
+      <app-header-layout mode="scroll">
+
+        <!-- Header -->
+        <app-header>
+          <app-toolbar>
+            <iron-icon icon="menu" drawer-toggle=""></iron-icon>
+            <div class="toolbar">
+              <h1>Employees</h1>
+              <paper-button>
+                <iron-icon icon="add"></iron-icon>
+                Add Employee
+              </paper-button>
+            </div>
+            
+          </app-toolbar>
+        </app-header>
+  
+        <!-- Main content -->
+        <main id="primary">
+          <iron-ajax auto="" url="../../data/employees.json" handle-as="json" last-response="{{ajaxContent}}"></iron-ajax><table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Date contract</th>
+                <th>Active</th>
+              </tr>
+
+              </thead><tbody>
+              
+
+                <template is="dom-repeat" items="[[ajaxContent.employees]]">
+                    <tr>
+                      <td>[[_showIndex(index)]]</td>
+                      <td>[[item.name]]</td>
+                      <td>[[item.status]]</td>
+                      <td>[[item.date_contract]]</td>
+                      <td>
+                        <paper-button>View CV</paper-button>
+                      </td>
+                    </tr>
+                </template>
+                
+              </tbody>
+            
+          </table>
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer"></footer>
+      </app-header-layout>
+    </app-drawer-layout>
+
+  </template>
+
+  <script>/**
+ * @customElement
+ * @polymer
+ */
+class ApplayoutApp extends Polymer.Element {
+  static get is() {
+    return 'applayout-app';
+  }
+
+  static get properties() {
+    return {};
+  }
+
+  _showIndex(index) {
+    return index + 1;
+  }
+
+}
+
+window.customElements.define(ApplayoutApp.is, ApplayoutApp);</script>
+</dom-module>
